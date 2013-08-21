@@ -1,5 +1,7 @@
 sbtPlugin := true
 
+scalaVersion := "2.10.2"
+
 scalacOptions += "-deprecation"
 
 name := "sbt-lwjgl-plugin"
@@ -8,7 +10,7 @@ organization := "com.github.philcali"
 
 version := "3.1.4"
 
-libraryDependencies += "net.databinder" %% "dispatch-http" % "0.8.8"
+libraryDependencies += "net.databinder" % "dispatch-http_2.10" % "0.8.8"
 
 publishTo <<= version { v =>
   val nexus = "https://oss.sonatype.org/"

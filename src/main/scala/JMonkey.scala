@@ -62,6 +62,9 @@ object JMonkeyProject extends Plugin {
 
     val cleanCache = TaskKey[Unit]("jmonkey-clean-cache",
       "Purges the jMonkey installs in the local cache.")
+      
+    val os = SettingKey[(String, String)]("jmonkey-os", 
+      "This is the targeted OS for the build. Defaults to the running OS.") 
   }
 
   private def jmonkeyUpdateTask = 
@@ -241,6 +244,7 @@ object JMonkeyProject extends Plugin {
     if(!d.exists) IO.createDirectory(d)
 
   lazy val baseSettings: Seq[Setting[_]] = Seq (
+      os := HelperMethods.defineOs,
       baseRepo := "http://jmonkeyengine.com/nightly",
       baseVersion := "jME3",
       targetDate := new java.util.Date(),
@@ -249,7 +253,7 @@ object JMonkeyProject extends Plugin {
         sdf.format(_)
       },
 
-      userAgent <<= (version, LWJGLPlugin.lwjgl.os) { (v, os) => 
+      userAgent <<= (version, os) { (v, os) => 
         val operating = os match {
           case ("macosx", _) => "Macintosh"
           case ("windows", _) => "Windows"
@@ -289,6 +293,5 @@ object JMonkeyProject extends Plugin {
       }
   )
 
-  lazy val jmonkeySettings: Seq[Setting[_]] =
-    LWJGLPlugin.lwjglSettings ++ baseSettings
+  lazy val jmonkeySettings: Seq[Setting[_]] = baseSettings
 }
