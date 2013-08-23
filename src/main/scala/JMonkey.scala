@@ -143,16 +143,11 @@ object JMonkeyProject extends Plugin {
           // Get the jmonkey libs except those...
           val base = dd / jname
           val baselib = base / "lib"
-          val exclude = baselib * "*test*" +++
-            (baselib * "lwjgl.jar") +++
-            (baselib * "*examples*") +++
-            (baselib * "*-desktop.jar")
 
           // jMonkey libs we're interested in 
           val commonJar = base * "jMonkeyEngine%s.jar".format(jme(bv))
 
-          val common = baselib * "*.jar" ---
-            (exclude) +++ commonJar +++
+          val common = baselib * "*.jar" +++ commonJar +++
             (base / "opt" / "native-bullet" * "%s-bullet.jar".format(bv))
       
           // Different jMonkey jars for platform 
