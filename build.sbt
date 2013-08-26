@@ -4,21 +4,13 @@ scalaVersion := "2.10.2"
 
 scalacOptions += "-deprecation"
 
-name := "sbt-lwjgl-plugin"
+name := "sbt-lwjgl-plugin-mod"
 
 organization := "com.github.philcali"
 
 version := "3.1.4"
 
 libraryDependencies += "net.databinder" % "dispatch-http_2.10" % "0.8.8"
-
-publishTo <<= version { v =>
-  val nexus = "https://oss.sonatype.org/"
-  if (v.trim.endsWith("SNAPSHOT"))
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases" at nexus + "service/local/staging/deploy/maven2")
-}
 
 publishMavenStyle := true
 
@@ -27,7 +19,7 @@ publishArtifact in Test := false
 pomIncludeRepository := { x => false }
 
 pomExtra := (
-  <url>https://github.com/philcali/sbt-lwjgl-plugin</url>
+  <url>https://github.com/cuevash/sbt-lwjgl-plugin</url>
   <licenses>
     <license>
       <name>The MIT License</name>
@@ -36,8 +28,8 @@ pomExtra := (
     </license>
   </licenses>
   <scm>
-    <url>git@github.com:philcali/sbt-lwjgl-plugin.git</url>
-    <connection>scm:git:git@github.com:philcali/sbt-lwjgl-plugin.git</connection>
+    <url>git@github.com:cuevash/sbt-lwjgl-plugin.git</url>
+    <connection>scm:git:git@github.com:cuevash/sbt-lwjgl-plugin.git</connection>
   </scm>
   <developers>
     <developer>
@@ -47,3 +39,11 @@ pomExtra := (
     </developer>
   </developers>
 )
+
+publishTo <<= version { v =>
+  if (v.trim.endsWith("SNAPSHOT"))
+    Some(Resolver.file("file",  new File( "/Users/hector/ScalaWorkspace/cuevash-mvn-repo/snapshots" )) )
+  else
+  	Some(Resolver.file("file",  new File( "/Users/hector/ScalaWorkspace/cuevash-mvn-repo/releases" )) )
+}
+
