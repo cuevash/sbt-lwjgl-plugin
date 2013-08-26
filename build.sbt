@@ -2,6 +2,8 @@ sbtPlugin := true
 
 scalaVersion := "2.10.2"
 
+crossScalaVersions := Seq("2.9.2", "2.10.2")
+
 scalacOptions += "-deprecation"
 
 name := "sbt-lwjgl-plugin-mod"
