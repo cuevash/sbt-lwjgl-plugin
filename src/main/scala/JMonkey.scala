@@ -148,7 +148,7 @@ object JMonkeyProject extends Plugin {
           val commonJar = base * "jMonkeyEngine%s.jar".format(jme(bv))
 
           val common = baselib * "*.jar" +++ commonJar +++
-            (base / "opt" / "jME3" * "*-bullet-natives.jar".format(bv))
+            (base / "opt" / "native-bullet" * "*-bullet-natives.jar".format(bv))
       
           // Different jMonkey jars for platform 
           val desktop = baselib / "%s-desktop.jar".format(bv)
